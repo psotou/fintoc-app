@@ -2,11 +2,13 @@ package main
 
 import (
 	"fintoc-app/pkg/utils"
+	"flag"
 	"fmt"
 	"os"
+	"strings"
 )
 
-const ReqUrl string = "https://api.fintoc.com/v1/accounts/%s/movements?link_token=%s"
+const ReqUrl string = "https://api.fintoc.com/v1/accounts/%s/movements?link_token=%s&per_page=%s"
 
 type Movement struct {
 	Id              string `json:"id"`
@@ -38,17 +40,21 @@ type Inst struct {
 }
 
 func main() {
+	var perPage = flag.String("p", "10", "number of elements per page")
+	flag.Parse()
+
 	var movements []Movement
-	url := fmt.Sprintf(ReqUrl, os.Getenv("BCH_ACCOUNT_ID"), os.Getenv("FINTOC_TOKEN"))
+	url := fmt.Sprintf(ReqUrl, os.Getenv("BCH_ACCOUNT_ID"), os.Getenv("FINTOC_TOKEN"), *perPage)
 	resData := utils.GetReq(url)
 	utils.ParseJson(resData, &movements)
 
 	for i := 0; i < len(movements); i++ {
-		fmt.Printf("Fecha %43s\n", movements[i].TransactionDate)
-		fmt.Printf("Descripción %37s\n", movements[i].Description)
+		fmt.Println("-------------------------------------------------")
+		fmt.Printf("%49s\n", movements[i].Description)
+		fmt.Printf("Fecha %43s\n", strings.Replace(movements[i].TransactionDate[:19], "T", " ", -1))
 		fmt.Printf("Monto %43v\n", movements[i].Amount)
 		fmt.Printf("Moneda %42s\n", movements[i].Currency)
-		fmt.Printf("Pendiente %39v\n", movements[i].Pending)
+		// fmt.Printf("Pendiente %39v\n", movements[i].Pending)
 	}
 
 }
