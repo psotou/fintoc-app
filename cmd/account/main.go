@@ -40,6 +40,7 @@ func main() {
 	fmt.Printf("Disponible %18v\n", accounts[2].AccountBalance.Available)
 	fmt.Printf("Moneda %22s\n\n", accounts[2].Currency)
 	// Tarjeta de crédito internacional
+	fmt.Printf("Cuenta %22s\n", accounts[5].Id)
 	fmt.Printf("Cuenta %22s\n", accounts[5].Name)
 	fmt.Printf("Usado %23v\n", usadoUSD)
 	fmt.Printf("Moneda %22s\n", accounts[5].Currency)
