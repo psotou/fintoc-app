@@ -36,12 +36,11 @@ func main() {
 	usadoUSD := (accounts[5].AccountBalance.Limit - accounts[5].AccountBalance.Available) / 100
 
 	// Cuenta corriente
-	fmt.Printf("Cuenta %22s\n", accounts[2].Name)
-	fmt.Printf("Disponible %18v\n", accounts[2].AccountBalance.Available)
-	fmt.Printf("Moneda %22s\n\n", accounts[2].Currency)
+	fmt.Printf("Cuenta %22s\n", accounts[0].Name)
+	fmt.Printf("Disponible %18v\n", int(accounts[0].AccountBalance.Available))
+	fmt.Printf("Moneda %22s\n\n", accounts[0].Currency)
 	// Tarjeta de crédito internacional
-	fmt.Printf("Cuenta %22s\n", accounts[5].Id)
 	fmt.Printf("Cuenta %22s\n", accounts[5].Name)
-	fmt.Printf("Usado %23v\n", usadoUSD)
+	fmt.Printf("Usado %23v\n", int(usadoUSD))
 	fmt.Printf("Moneda %22s\n", accounts[5].Currency)
 }
